@@ -29,28 +29,24 @@ struct Config {
     sources: Sources,
 }
 
-fn main() {
-    let config = std::env::var("CF3_CONFIG").unwrap_or("cf3.toml".to_string());
-    let env = std::env::var("APP_ENV").unwrap_or("cf3.toml".to_string());
-    // println!("CF3_CONFIG: {:?}", config);
-
+fn get_config() -> Config {
+    let config_file = std::env::var("CF3_CONFIG").unwrap_or("cf3.toml".to_string());
     let mut file =
-        File::open(&config).expect(&format!("Failed to open config file: '{}'", &config));
+        File::open(&config_file).expect(&format!("Failed to open config file: '{}'", &config_file));
     let mut contents = String::new();
     file.read_to_string(&mut contents)
         .expect("Failed to read file");
     // let main_table = contents.parse::<toml::Table>().unwrap();
-    let main_table: Config = toml::from_str(&contents).unwrap();
-    // println!("{:?}", main_table);
-
-    let f_name = "testFeature2";
-    let feature = is_enabled(f_name, &env, &main_table);
-    println!("Feature {} found: {}", f_name, feature);
+    let config: Config = toml::from_str(&contents).unwrap();
+    config
 }
 
 // Is a feature enabled in the given environment?
-fn is_enabled(feature_name: &str, env: &str, main_table: &Config) -> bool {
-    let feature = main_table.features.get(feature_name);
+pub fn is_enabled(feature_name: &str, env: &str) -> bool {
+    let config = get_config();
+    println!("CF3_CONFIG: {:?}", config);
+
+    let feature = config.features.get(feature_name);
     if let Some(f1) = feature {
         return f1.environments.contains(&env.to_string());
     }
