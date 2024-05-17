@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use neon::prelude::*;
 use std::collections::HashMap;
 use std::fs::File;
 use std::io::Read;
@@ -52,3 +53,10 @@ pub fn is_enabled(feature_name: &str, env: &str) -> bool {
     }
     false
 }
+
+#[neon::main]
+fn main(mut cx: ModuleContext) -> NeonResult<()> {
+    cx.export_function("is_enabled", is_enabled)?;
+    Ok(())
+}
+
