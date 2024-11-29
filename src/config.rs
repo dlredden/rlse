@@ -34,10 +34,10 @@ pub static CONFIG: OnceLock<Config> = OnceLock::new();
 
 pub fn get_config() -> &'static Config {
     CONFIG.get_or_init(|| {
-        let config_file = std::env::var("RLSE_CONFIG").unwrap_or_else(|_| "rlse.toml".to_string());
-        let mut file = File::open(&config_file)
+        let config_file: String = std::env::var("RLSE_CONFIG").unwrap_or_else(|_| "rlse.toml".to_string());
+        let mut file: File = File::open(&config_file)
             .expect(&format!("Failed to open config file: '{}'", &config_file));
-        let mut contents = String::new();
+        let mut contents: String = String::new();
         file.read_to_string(&mut contents).expect("Failed to read file");
         toml::from_str(&contents).expect("Invalid TOML format in config file")
     })
