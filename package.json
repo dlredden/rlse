@@ -1,6 +1,6 @@
 {
   "name": "rlse",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Code first feature flags",
   "homepage": "https://github.com/dlredden/rlse",
   "main": "index.node",
