@@ -1,13 +1,8 @@
-pub mod config;
-pub mod feature;
-mod neon_wrapper;
+use lib::feature::is_feature_enabled;
+use lib::config::{ get_config, Config };
 
-use neon::prelude::*;
-use neon_wrapper::is_enabled;
-
-// Neon module initialization
-#[neon::main]
-fn main(mut cx: ModuleContext) -> NeonResult<()> {
-    cx.export_function("is_enabled", is_enabled)?;
-    Ok(())
+pub fn is_enabled(feature_name: String, env: Option<String>) -> bool {
+    let config: &Config = get_config();
+    let env: String = env.unwrap_or_else(|| std::env::var("APP_ENV").unwrap_or("dev".to_string()));
+    is_feature_enabled(&feature_name, &env, &config)
 }

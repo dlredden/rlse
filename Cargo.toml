@@ -1,3 +1,4 @@
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [package]
 name = "rlse"
 version = "0.1.0"
@@ -6,11 +7,14 @@ edition = "2021"
 [lib]
 name = "rlse"
 path = "src/lib.rs"
-crate-type = ["cdylib", "staticlib", "rlib"]
+crate-type = ["cdylib"]
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[workspace]
+members = [ "lib", "napi-server" , "wasm-client" ]
 
 [dependencies]
-neon = "1"
-toml = "0.8.8"
-serde = { version = "1.0", features = ["derive"] }
+napi = "2"
+napi-derive = "2"
+lib = { path = "./lib" }
+napi-server = { path = "./napi-server" }
+wasm-client = { path = "./wasm-client" }

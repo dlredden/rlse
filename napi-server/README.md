@@ -9,7 +9,7 @@ Rlse (pronounced “release”) is an open-source library written in Rust that m
 Add Rlse to your project using npm:
 
 ```sh
-$ npm install rlse -S
+$ npm install @rlse/server -S
 ```
 
 ### Create a configuration file
@@ -54,7 +54,7 @@ Rlse makes it easy to conditionally enable features based on your configuration.
 **Example:**
 
 ```javascript
-import { is_enabled } from "rlse";
+import { is_enabled } from "@rlse/server";
 
 // Automatically checks the `APP_ENV` environment variable.
 // Defaults to the 'dev' environment if `APP_ENV` is not set.

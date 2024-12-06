@@ -1,8 +1,8 @@
 #[cfg(test)]
 mod tests {
   use std::collections::HashMap;
-  use rlse::config::{Config, Feature, Issue, Sources};
-  use rlse::feature::{is_feature_enabled, get_feature_issue_source};
+  use lib::config::{Config, Feature, Issue, Sources};
+  use lib::feature::{is_feature_enabled, get_feature_issue_source};
 
     #[test]
     fn test_is_feature_enabled() {
