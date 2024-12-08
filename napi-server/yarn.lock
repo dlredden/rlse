@@ -65,7 +65,7 @@ __metadata:
   resolution: "@rlse/server@workspace:."
   dependencies:
     "@napi-rs/cli": "npm:^2.18.4"
-    ava: "npm:^6.0.1"
+    ava: "npm:^6.2.0"
   languageName: unknown
   linkType: soft
 
@@ -248,7 +248,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ava@npm:^6.0.1":
+"ava@npm:^6.2.0":
   version: 6.2.0
   resolution: "ava@npm:6.2.0"
   dependencies:

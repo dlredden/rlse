@@ -4,30 +4,37 @@ use std::sync::OnceLock;
 use std::collections::HashMap;
 use serde::{Deserialize, Serialize};
 
-#[derive(Deserialize, Debug, Serialize)]
-pub struct Sources {
-    pub default: String,
-    pub jira: Option<String>,
-    pub bitbucket: Option<String>,
-    pub github: Option<String>,
-}
+// #[derive(Deserialize, Debug, Serialize)]
+// pub struct Sources {
+//     pub default: String,
+//     pub jira: Option<String>,
+//     pub bitbucket: Option<String>,
+//     pub github: Option<String>,
+// }
 
-#[derive(Deserialize, Debug, Serialize)]
-pub struct Issue {
-    pub id: String,
-    pub source: Option<String>,
-}
+// #[derive(Deserialize, Debug, Serialize)]
+// pub enum Source {
+//     Jira,
+//     Bitbucket,
+//     Github,
+// }
+
+// #[derive(Deserialize, Debug, Serialize)]
+// pub struct Issue {
+//     pub id: String,
+//     pub source: Option<Source>,
+// }
 
 #[derive(Deserialize, Debug, Serialize)]
 pub struct Feature {
     pub environments: Vec<String>,
-    pub issue: Option<Issue>,
+    // pub issue: Option<Issue>,
 }
 
 #[derive(Deserialize, Debug, Serialize)]
 pub struct Config {
     pub features: HashMap<String, Feature>,
-    pub sources: Sources,
+    // pub sources: Sources,
 }
 
 pub static CONFIG: OnceLock<Config> = OnceLock::new();

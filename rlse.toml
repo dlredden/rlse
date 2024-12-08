@@ -1,9 +1,4 @@
-[sources]
-default = 'jira'
-jira = 'https://releasenoteshq.atlassian.net/jira'
-github = 'https://github.com/dlredden/releasenotes'
-
 [features]
-testFeature3 = { environments = ['uat', 'test'], issue = { id = 'rlse-3', source = 'github' } }
-testFeature1 = { environments = ['dev', 'test'], issue = { id = 'rlse-1'} }
-testFeature2 = { environments = ['test'], issue = { id = 'rlse-2' } }
+testFeature1 = { environments = ['dev', 'test'] }
+testFeature2 = { environments = ['test'] }
+testFeature3 = { environments = ['uat', 'test'] }

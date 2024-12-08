@@ -3,6 +3,10 @@
 name = "rlse"
 version = "0.1.0"
 edition = "2021"
+description = "Rust library for feature manageent"
+license = "ISC"
+authors = ["DL Redden <dl@rlse.com>"]
+repository = "https://github.com/dlredden/rlse.git"
 
 [lib]
 name = "rlse"
@@ -10,11 +14,11 @@ path = "src/lib.rs"
 crate-type = ["cdylib"]
 
 [workspace]
-members = [ "lib", "napi-server" , "wasm-client" ]
+members = [ "lib", "napi-server" , "client" ]
 
 [dependencies]
 napi = "2"
 napi-derive = "2"
 lib = { path = "./lib" }
 napi-server = { path = "./napi-server" }
-wasm-client = { path = "./wasm-client" }
+client = { path = "./client" }
