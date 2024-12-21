@@ -1,4 +1,3 @@
 [features]
-testFeature1 = { environments = ['dev', 'test'] }
-testFeature2 = { environments = ['test'] }
-testFeature3 = { environments = ['uat', 'test'] }
+testFeatureDevTest = { environments = ['dev', 'test'] }
+testFeatureProd = { environments = ['prod'] }

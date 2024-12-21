@@ -1,0 +1,44 @@
+{
+  "name": "rlse",
+  "version": "0.1.2",
+  "description": "Code first feature flags",
+  "homepage": "https://github.com/dlredden/rlse",
+  "module": "index.ts",
+  "type": "module",
+  "author": "Rlse.dev Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dlredden/rlse/issues",
+    "email": "support@rlse.dev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dlredden/rlse.git"
+  },
+  "keywords": [
+    "feature",
+    "flag",
+    "feature flag",
+    "toggle",
+    "switch",
+    "feature branch",
+    "abstraction"
+  ],
+  "scripts": {
+    "build": "bun run build.ts",
+    "test": "jest",
+    "lint": "eslint . --ext .ts",
+    "format": "prettier --write .",
+    "prepublishOnly": "bun run build"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "bun-plugin-dts": "^0.3.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "toml": "^3.0.0"
+  }
+}
