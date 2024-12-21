@@ -3,10 +3,18 @@
   "version": "0.1.3",
   "description": "Code first feature flags",
   "homepage": "https://github.com/dlredden/rlse",
-  "module": "index.ts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "type": "module",
   "author": "Rlse.dev Team",
   "license": "ISC",
+  "exports": {
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js"
+  },
+  "files": [
+    "dist"
+  ],
   "bugs": {
     "url": "https://github.com/dlredden/rlse/issues",
     "email": "support@rlse.dev"
@@ -26,9 +34,7 @@
   ],
   "scripts": {
     "build": "bun run build.ts",
-    "test": "jest",
-    "lint": "eslint . --ext .ts",
-    "format": "prettier --write .",
+    "test": "bun test",
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {
