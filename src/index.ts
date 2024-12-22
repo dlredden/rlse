@@ -19,11 +19,17 @@ type IsFeatureEnabledProps = {
  */
 export function isFeatureEnabled(options: IsFeatureEnabledProps): boolean {
   let cfg = options.config ? options.config : getConfig();
-  let environment = options.env
-    ? options.env
-    : process.env.APP_ENV
-    ? process.env.APP_ENV
-    : "dev";
+  let environment = options.env;
+
+  if (!environment) {
+    if (process.env.APP_ENV) {
+      environment = process.env.APP_ENV;
+    } else if (process.env.VERCEL_ENV) {
+      environment = process.env.VERCEL_ENV;
+    } else {
+      environment = "dev";
+    }
+  }
 
   const feature_config = cfg.features[options.feature];
   if (!feature_config) return false;

@@ -45,7 +45,7 @@ uniqueFriendlyFeatureName = { environments = ['dev', 'test']}
 In this example:
 
 - The uniqueFriendlyFeatureName feature is enabled only in the dev environment.
-- The environment can be determined dynamically from the `APP_ENV` environment variable or explicitly passed when testing the feature flag.
+- The environment can be determined dynamically from the `APP_ENV` or `VERCEL_ENV` environment variable or explicitly passed when testing the feature flag.
 
 ## Usage
 
@@ -56,7 +56,9 @@ Rlse makes it easy to conditionally enable features based on your configuration.
 ```javascript
 import { isFeatureEnabled } from "rlse";
 
-// Automatically uses environment variabls: process.env.APP_ENV | 'dev' and process.env.RLSE_CONFIG | 'rlse.toml'.
+// Automatically uses environment variabls:
+//   env: process.env.APP_ENV | rocess.env.VERCEL_ENV | 'dev'
+//   config: process.env.RLSE_CONFIG | 'rlse.toml'.
 if (isFeatureEnabled({ feature: "testFeatureDevTest" })) {
   // Feature-specific logic ...
 }
