@@ -70,6 +70,40 @@ if (isFeatureEnabled({ feature: "missingFeature", env: "dev", config })) {
 }
 ```
 
+**Next.js Example**
+Next.js has some special ways of working. There's a little hackery required to get rlse working since it tends to loath node.js modules. (I'm sure there's better ways that someone smarter than me could do. I'm open to learning new things.)
+Put this in a server action or API route that can be reused throughout your app.
+
+```typescript
+import { promises as fs } from "fs";
+import { isFeatureEnabled, parseConfig, type Config } from "rlse";
+
+let rlseConfig: Config;
+
+export async function isEnabled(feature: string): Promise<boolean> {
+  if (!rlseConfig) {
+    rlseConfig = parseConfig(await fs.readFile("rlse.toml", "utf-8"));
+  }
+
+  return await isFeatureEnabled({
+    feature,
+    env: process.env.VERCEL_ENV,
+    config: rlseConfig,
+  });
+}
+```
+
+Then you can call it like so from pages
+
+```typescript
+import { isEnabled } from "./actions";
+
+export default async function Page() {
+  const featureEnabled = await isEnabled("myCustomFeature");
+  ...
+}
+```
+
 🛑 Important:
 
 - is_enabled() will return false unless the feature/environment combination is explicitly defined in the configuration file.

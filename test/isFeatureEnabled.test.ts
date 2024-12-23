@@ -8,41 +8,41 @@ const config = {
   },
 };
 
-test("Feature with defaults", () => {
-  expect(isFeatureEnabled({ feature: "testFeatureDevTest" })).toBe(true);
-  expect(isFeatureEnabled({ feature: "testFeatureProd" })).toBe(false);
-  expect(isFeatureEnabled({ feature: "missingFeature" })).toBe(false);
+test("Feature with defaults", async () => {
+  expect(await isFeatureEnabled({ feature: "testFeatureDevTest" })).toBe(true);
+  expect(await isFeatureEnabled({ feature: "testFeatureProd" })).toBe(false);
+  expect(await isFeatureEnabled({ feature: "missingFeature" })).toBe(false);
 });
 
-test("Feature with env", () => {
+test("Feature with env", async () => {
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "testFeatureDevTest",
       env: "dev",
     })
   ).toBe(true);
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "missingFeature",
       env: "dev",
     })
   ).toBe(false);
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "testFeatureDevTest",
       env: "test",
       config,
     })
   ).toBe(true);
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "testFeatureDevTest",
       env: "prod",
       config,
     })
   ).toBe(false);
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "missingFeature",
       env: "dev",
       config,
@@ -50,23 +50,25 @@ test("Feature with env", () => {
   ).toBe(false);
 });
 
-test("Feature with config", () => {
+test("Feature with config", async () => {
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "testFeatureDevTest",
       config,
     })
   ).toBe(true);
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "testFeatureDevTest",
       env: "test",
       config,
     })
   ).toBe(true);
-  expect(isFeatureEnabled({ feature: "missingFeature", config })).toBe(false);
+  expect(await isFeatureEnabled({ feature: "missingFeature", config })).toBe(
+    false
+  );
   expect(
-    isFeatureEnabled({
+    await isFeatureEnabled({
       feature: "missingFeature",
       env: "dev",
       config,

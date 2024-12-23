@@ -1,14 +1,26 @@
-import data from "../rlse.toml";
-import { isFeatureEnabled } from "../dist";
+import path from "path";
+import { promises as fs } from "fs";
+import { isFeatureEnabled, parseConfig } from "../dist";
 
-if (isFeatureEnabled({ feature: "testFeatureDevTest", config: data })) {
-  console.log("testFeatureDevTest enabled!");
+async function test() {
+  const config = parseConfig(
+    await fs.readFile(path.resolve(process.cwd(), "rlse.toml"), "utf-8")
+  );
+  if (await isFeatureEnabled({ feature: "testFeatureDevTest", config })) {
+    console.log("testFeatureDevTest enabled!");
+  }
+
+  if (
+    await isFeatureEnabled({
+      feature: "testFeatureDevTest",
+      config,
+      env: "prod",
+    })
+  ) {
+    console.log("testFeatureDevTest enabled?");
+  } else {
+    console.log("testFeatureDevTest disabled!");
+  }
 }
 
-if (
-  isFeatureEnabled({ feature: "testFeatureDevTest", config: data, env: "prod" })
-) {
-  console.log("testFeatureDevTest enabled?");
-} else {
-  console.log("testFeatureDevTest disabled!");
-}
+test();
