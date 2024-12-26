@@ -1,17 +1,14 @@
 import { getConfig } from "./config";
-import { type Config } from "./types";
 export { initConfig } from "./config";
 
 /**
  * The properties for the `isFeatureEnabled` function.
  * @property {string} feature - The feature to check.
  * @property {string} [env] - The environment to check against.
- * @property {Config} [config] - The configuration to check against.
  */
 type IsFeatureEnabledProps = {
   feature: string;
   env?: string;
-  config?: Config;
 };
 
 /**
@@ -21,7 +18,7 @@ type IsFeatureEnabledProps = {
 export async function isFeatureEnabled(
   options: IsFeatureEnabledProps
 ): Promise<boolean> {
-  let cfg = options.config ? options.config : await getConfig();
+  let cfg = await getConfig();
   let environment = options.env;
 
   if (!environment) {

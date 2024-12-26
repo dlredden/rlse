@@ -49,9 +49,9 @@ In this example:
 
 ## Usage
 
-Rlse makes it easy to conditionally enable features based on your configuration. Use the is_enabled function to check whether a feature is active in a given environment.
+Rlse makes it easy to conditionally enable features based on your configuration. Use the `isFeatureEnabled()` function to check whether a feature is active in a given environment.
 
-**Example:**
+**Server Example:**
 
 ```javascript
 import { isFeatureEnabled } from "rlse";
@@ -64,49 +64,31 @@ if (isFeatureEnabled({ feature: "testFeatureDevTest" })) {
 }
 
 // Explicitly specify the environment and/or config data.
-// This is useful in a browser/client where bundling your toml file with your app is required.
 if (isFeatureEnabled({ feature: "missingFeature", env: "dev", config })) {
   // Feature-specific logic ...
 }
 ```
 
-**Next.js Example**
-Next.js has some special ways of working. There's a little hackery required to get rlse working since it tends to loath node.js modules. (I'm sure there's better ways that someone smarter than me could do. I'm open to learning new things.)
-Put this in a server action or API route that can be reused throughout your app.
+**Client Example**
 
 ```typescript
-import { promises as fs } from "fs";
-import { isFeatureEnabled, parseConfig, type Config } from "rlse";
+import { isFeatureEnabled, initConfig } from "rlse/browser";
 
-let rlseConfig: Config;
+// You'll need to bundle rlse.toml in your client side code or make an API call to get it.
+// Initialize the config file client-side
+initConfig(CONFIG_FILE);
 
 export async function isEnabled(feature: string): Promise<boolean> {
-  if (!rlseConfig) {
-    rlseConfig = parseConfig(await fs.readFile("rlse.toml", "utf-8"));
-  }
-
   return await isFeatureEnabled({
     feature,
-    env: process.env.VERCEL_ENV,
-    config: rlseConfig,
+    env: APP_ENV, //Assuming you set a client-side env var called APP_ENV
   });
-}
-```
-
-Then you can call it like so from pages
-
-```typescript
-import { isEnabled } from "./actions";
-
-export default async function Page() {
-  const featureEnabled = await isEnabled("myCustomFeature");
-  ...
 }
 ```
 
 🛑 Important:
 
-- is_enabled() will return false unless the feature/environment combination is explicitly defined in the configuration file.
+- `isFeatureEnabled()` will return false unless the feature/environment combination is explicitly defined in the configuration file.
 - Ensure your configuration file accurately reflects your environment setup.
 
 ## Why Choose Rlse?

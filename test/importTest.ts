@@ -1,19 +1,18 @@
 import path from "path";
-import { promises as fs } from "fs";
-import { isFeatureEnabled, parseConfig } from "../dist";
+import fs from "fs/promises";
+import { isFeatureEnabled, initConfig } from "../dist/browser";
 
 async function test() {
-  const config = parseConfig(
+  initConfig(
     await fs.readFile(path.resolve(process.cwd(), "rlse.toml"), "utf-8")
   );
-  if (await isFeatureEnabled({ feature: "testFeatureDevTest", config })) {
+  if (await isFeatureEnabled({ feature: "testFeatureDevTest" })) {
     console.log("testFeatureDevTest enabled!");
   }
 
   if (
     await isFeatureEnabled({
       feature: "testFeatureDevTest",
-      config,
       env: "prod",
     })
   ) {

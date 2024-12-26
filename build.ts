@@ -1,15 +1,24 @@
 import type { BuildConfig } from "bun";
 import dts from "bun-plugin-dts";
 
-const defaultBuildConfig: BuildConfig = {
+const defaults: BuildConfig = {
   entrypoints: ["./src/index.ts"],
+  plugins: [dts()],
+  naming: "[name].mjs",
   outdir: "./dist",
+  minify: true,
+  sourcemap: "linked",
 };
 
 await Promise.all([
   Bun.build({
-    ...defaultBuildConfig,
-    outdir: "./dist",
+    ...defaults,
     plugins: [dts()],
+    target: "node",
+  }),
+  Bun.build({
+    ...defaults,
+    entrypoints: ["./src/browser.ts"],
+    target: "browser",
   }),
 ]);
