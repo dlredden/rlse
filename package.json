@@ -42,11 +42,11 @@
     "prepublishOnly": "bun run build"
   },
   "devDependencies": {
-    "@types/bun": "latest",
+    "@types/bun": "^1.1.14",
     "bun-plugin-dts": "^0.3.0"
   },
   "peerDependencies": {
-    "typescript": "^5.0.0"
+    "typescript": "^5.7.2"
   },
   "dependencies": {
     "toml": "^3.0.0"
