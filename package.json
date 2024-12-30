@@ -8,12 +8,12 @@
   "license": "ISC",
   "exports": {
     ".": {
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.mjs"
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
     },
     "./browser": {
-      "import": "./dist/browser.mjs",
-      "require": "./dist/browser.mjs"
+      "import": "./dist/browser.js",
+      "require": "./dist/browser.js"
     }
   },
   "files": [

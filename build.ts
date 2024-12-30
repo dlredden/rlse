@@ -4,7 +4,7 @@ import dts from "bun-plugin-dts";
 const defaults: BuildConfig = {
   entrypoints: ["./src/index.ts"],
   plugins: [dts()],
-  naming: "[name].mjs",
+  naming: "[name].js",
   outdir: "./dist",
   minify: true,
   sourcemap: "linked",
